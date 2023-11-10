@@ -1,13 +1,16 @@
-// ignore_for_file: deprecated_member_use, use_build_context_synchronously
+// ignore_for_file: deprecated_member_use
 
 import 'dart:developer';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:steamflix/app/controller/fav_controller.dart';
 import 'package:steamflix/app/models/popular_movies_model.dart';
 import 'package:steamflix/app/services/api.dart';
 import 'package:steamflix/app/utils/consts.dart';
-import 'package:steamflix/app/widgets/circularbutton.dart';
+import 'package:steamflix/app/widgets/bottomnavbar.dart';
 import 'package:steamflix/app/widgets/customlistmovie.dart';
 import 'package:steamflix/app/widgets/loadingscreen.dart';
 import 'package:steamflix/app/widgets/textcontainer.dart';
@@ -26,6 +29,7 @@ class MovieScreen extends StatefulWidget {
 class _MovieScreenState extends State<MovieScreen> {
   bool isLoading = true;
   late List<Results> recommendedMovies;
+  var watchlistController = Get.put(WatchlistController());
 
   @override
   void initState() {
@@ -35,7 +39,8 @@ class _MovieScreenState extends State<MovieScreen> {
 
   Future<void> fetchData() async {
     try {
-      recommendedMovies = await APIService().getRecommendedMovie(widget.movieId);
+      recommendedMovies =
+          await APIService().getRecommendedMovie(widget.movieId);
     } catch (e) {
       log('Error fetching recommended movies: $e');
     } finally {
@@ -45,27 +50,20 @@ class _MovieScreenState extends State<MovieScreen> {
     }
   }
 
-  Future<void> playTrailer(BuildContext context, String? trailerLink) async {
-    if (trailerLink != null) {
-      try {
-        if (await canLaunch(trailerLink)) {
-          await launch(trailerLink);
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Could not open the trailer link.'),
-            ),
-          );
-        }
-      } catch (e) {
-        log('Error launching trailer link: $e');
+  Future<void> playTrailer(BuildContext context, String trailerLink) async {
+    try {
+      if (await canLaunch(trailerLink)) {
+        await launch(trailerLink);
+      } else {
+        // ignore: use_build_context_synchronously
+        Get.snackbar(
+          'Error',
+          'Could not open the trailer link.',
+          snackPosition: SnackPosition.BOTTOM,
+        );
       }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Trailer link is null or empty.'),
-        ),
-      );
+    } catch (e) {
+      log('Error: $e');
     }
   }
 
@@ -73,6 +71,24 @@ class _MovieScreenState extends State<MovieScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(),
+      floatingActionButton:FloatingActionButton(
+        onPressed: () {
+          String movieId = widget.movieId;
+          if (watchlistController.isInWatchlist(movieId)) {
+            watchlistController.removeFromWatchlist(movieId);
+            Get.snackbar('Removed', 'Removed from Watchlist');
+          } else {
+            watchlistController.addToWatchlist(movieId);
+            Get.snackbar('Added', 'Added to Watchlist');
+          }
+        },
+        child: Obx(() => Icon(
+              watchlistController.isInWatchlist(widget.movieId)
+                  ? Icons.check
+                  : Icons.add,
+            )),
+      ),
       backgroundColor: background_primary,
       body: isLoading
           ? const LoadingScreen()
@@ -136,6 +152,8 @@ class _MovieScreenState extends State<MovieScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
+                               
+
                                 Text(
                                   snapshot.data!.voteAverage
                                       .toString()
@@ -156,25 +174,48 @@ class _MovieScreenState extends State<MovieScreen> {
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                                Row(
-                                  children: [
-                                    circularButton(
-                                      UniconsLine.play,
-                                      onTap: () {
-                                        HapticFeedback.lightImpact();
-                                        APIService()
-                                            .getTrailerLink(
-                                                snapshot.data.movieId.toString(),
-                                                "movie")
-                                            .then((value) =>
-                                                playTrailer(context, value));
-                                      },
-                                    ),
-                                  ],
-                                )
                               ],
                             ),
-                          )
+                          ),
+                          Positioned(
+                            width: size.width * 1.0,
+                            height: size.height * 0.4,
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      HapticFeedback.lightImpact();
+                                      APIService()
+                                          .getTrailerLink(
+                                              snapshot.data!.id.toString(),
+                                              "movie")
+                                          .then((value) =>
+                                              playTrailer(context, value));
+                                    },
+                                    child: ClipRect(
+                                        child: BackdropFilter(
+                                            filter: ImageFilter.blur(
+                                                sigmaX: 1.0, sigmaY: 1.0),
+                                            child: Container(
+                                              width: 60,
+                                              height: 60,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                color: white.withOpacity(0.5),
+                                              ),
+                                              child: const Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(UniconsLine.play)
+                                                ],
+                                              ),
+                                            ))),
+                                  )
+                                ]),
+                          ),
                         ],
                       ),
                       FutureBuilder(

@@ -1,6 +1,5 @@
  
 import 'package:flutter/material.dart';
-import 'package:steamflix/app/utils/consts.dart';
 
 Widget sectionText(String title, String subtitle) {
   return Container(
@@ -25,7 +24,7 @@ Widget sectionText(String title, String subtitle) {
         Text(
           subtitle.toUpperCase(),
           style: TextStyle(
-            color: accent_secondary,
+            color: Colors.amber,
             fontSize: 16,
             fontWeight: FontWeight.w500,
             letterSpacing: 5,

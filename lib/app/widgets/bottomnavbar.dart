@@ -58,7 +58,7 @@ class BottomNavBar extends StatelessWidget {
               Get.toNamed('/download');
             },
             icon: Icon(
-              UniconsLine.download_alt,
+              UniconsLine.favorite,
               color: controller.currentIndex == 2 ? Colors.white : inactive_accent,
             ),
           ),

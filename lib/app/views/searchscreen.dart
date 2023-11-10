@@ -50,19 +50,10 @@ class _SearchScreenState extends State<SearchScreen> {
         return false;
       },
       child: Scaffold(
+        bottomNavigationBar: BottomNavBar(),
         resizeToAvoidBottomInset: false,
         backgroundColor: background_primary,
-        bottomNavigationBar: AnimatedBuilder(
-          animation: _scrollController,
-          builder: (context, child) {
-            return AnimatedContainer(
-              duration: const Duration(milliseconds: 800),
-              curve: Curves.fastLinearToSlowEaseIn,
-              height: isVisible ? 75 : 0,
-              child: BottomNavBar(),
-            );
-          },
-        ),
+        
         extendBody: true,
         body: Stack(
           alignment: AlignmentDirectional.topStart,

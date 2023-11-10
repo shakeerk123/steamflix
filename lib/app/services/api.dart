@@ -28,18 +28,18 @@ class APIService {
     }
   }
 
-  // Future<List<Results>> getMovieLanguage() async {
-  //   try {
-  //     List<Results> movieList = [];
-  //     final url = '$baseUrl/movie/now_playing?&language=ml-IN&$apiKey&page=1';
-  //     final response = await _dio.get(url);
-  //     var movies = response.data['results'] as List;
-  //     movieList = movies.map((m) => Results.fromJson(m)).toList();
-  //     return movieList;
-  //   } catch (error, stacktrace) {
-  //     throw Exception('Exception occured: $error with stacktrace: $stacktrace');
-  //   }
-  // }
+  Future<List<Results>> getMalayamLanguage() async {
+    try {
+      List<Results> movieList = [];
+      final url = '$baseUrl/discover/movie?$apiKey&with_original_language=ml';
+      final response = await _dio.get(url);
+      var movies = response.data['results'] as List;
+      movieList = movies.map((m) => Results.fromJson(m)).toList();
+      return movieList;
+    } catch (error, stacktrace) {
+      throw Exception('Exception occured: $error with stacktrace: $stacktrace');
+    }
+  }
 
   Future<List<Results>> getTopRatedMovie() async {
     try {

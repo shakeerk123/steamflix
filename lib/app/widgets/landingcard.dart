@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:steamflix/app/utils/consts.dart';
 
 class LandingCard extends StatelessWidget {
@@ -52,12 +53,16 @@ class LandingCard extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 24),
             alignment: Alignment.bottomCenter,
             width: size.width,
-            child: Text(
-              name,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.white,
+            child: Shimmer.fromColors(
+              baseColor: Colors.white,
+              highlightColor: Colors.grey,
+              child: Text(
+                name,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
           )

@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:steamflix/app/controller/bottombar.dart';
+import 'package:steamflix/app/controller/main_controller.dart';
 import 'package:steamflix/app/utils/consts.dart';
 import 'package:steamflix/app/widgets/bottomnavbar.dart';
 import 'package:steamflix/app/widgets/customcarouselslider.dart';
@@ -9,24 +8,17 @@ import 'package:steamflix/app/widgets/customlistmovie.dart';
 import 'package:steamflix/app/widgets/loadingscreen.dart';
 import 'package:steamflix/app/widgets/sectiontext.dart';
 
-class MainScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
   final MainController mainController = Get.put(MainController());
 
-  MainScreen({super.key});
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: Obx(
-        () => AnimatedContainer(
-          duration: const Duration(milliseconds: 800),
-          curve: Curves.fastLinearToSlowEaseIn,
-          height: mainController.isVisible.value ? 75 : 0,
-          child: BottomNavBar(),
-        ),
-      ),
+      bottomNavigationBar: BottomNavBar(),
       extendBody: true,
       body: Obx(
         () => mainController.isLoading.value
@@ -43,14 +35,20 @@ class MainScreen extends StatelessWidget {
                   shrinkWrap: true,
                   children: [
                     CustomCarouselSlider(data: mainController.topRatedShows),
-                    sectionText('Popular', 'Movies'),
-                    CustomListMovie(popularMovies: mainController.popularMovies),
                     sectionText('TOP Rated', 'Movies'),
-                    CustomListMovie(popularMovies: mainController.topRatedMovie),
+                    CustomListMovie(
+                        popularMovies: mainController.topRatedMovie),
+                    sectionText('Popular', 'Movies'),
+                    CustomListMovie(
+                        popularMovies: mainController.popularMovies),
+                    sectionText('Malayalam', 'Movies'),
+                    CustomListMovie(
+                        popularMovies: mainController.malayalamMovies),
                     sectionText('Popular', 'Shows'),
                     CustomListTv(data: mainController.popularShows),
                     sectionText('NOW Playing', 'Movies'),
-                    CustomListMovie(popularMovies: mainController.nowPLayingMovie),
+                    CustomListMovie(
+                        popularMovies: mainController.nowPLayingMovie),
                   ],
                 ),
               ),
