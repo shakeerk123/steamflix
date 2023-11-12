@@ -124,7 +124,7 @@ class _MovieScreenState extends State<MovieScreen> {
                             )),
                           ),
                           Container(
-                            width: size.width,
+                            width: size.width ,
                             height: size.height * 0.40 > 300
                                 ? size.height * 0.40
                                 : 300,

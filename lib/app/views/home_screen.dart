@@ -35,6 +35,9 @@ class HomeScreen extends StatelessWidget {
                   shrinkWrap: true,
                   children: [
                     CustomCarouselSlider(data: mainController.topRatedShows),
+                    sectionText('Animated', 'Movies'),
+                    CustomListMovie(
+                        popularMovies: mainController.animatedMovies),
                     sectionText('TOP Rated', 'Movies'),
                     CustomListMovie(
                         popularMovies: mainController.topRatedMovie),

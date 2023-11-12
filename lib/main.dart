@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:steamflix/app/views/news/entertainment_news.dart';
 
 import 'package:steamflix/app/views/loginscreen.dart';
 import 'package:steamflix/app/views/home_screen.dart';
 import 'package:steamflix/app/views/moviescreen.dart';
-import 'package:steamflix/app/views/profilescreen.dart';
 import 'package:steamflix/app/views/searchscreen.dart';
 import 'package:steamflix/app/views/tvshowscreen.dart';
 import 'package:steamflix/app/views/download.dart';
@@ -31,11 +31,12 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/main', page: () => HomeScreen()),
         GetPage(name: '/search', page: () => const SearchScreen()),
 
-        GetPage(name: '/profile', page: () => const ProfileScreen()),
-       GetPage(
-         name: '/download',
-         page: () => const DownloadScreen(),
-       ),
+        GetPage(name: '/news', page: () => NewsHomeScreen()),
+        
+        GetPage(
+          name: '/download',
+          page: () => const DownloadScreen(),
+        ),
         GetPage(
           name: '/movie/:id',
           page: () => MovieScreen(movieId: Get.parameters['id']!),

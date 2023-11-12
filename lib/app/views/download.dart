@@ -69,12 +69,12 @@ class DownloadScreen extends StatelessWidget {
                               return Lottie.memory(
                                   dotLottie.animations.values.single);
                             } else {
-                              return const Text("Download");
+                              return const Text("Click me");
                             }
                           },
                         ),
                         const Text(
-                          "Download",
+                          "Click me",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -100,7 +100,7 @@ class DownloadScreen extends StatelessWidget {
       Get.snackbar(
         'Error',
         'Could not open the telegram link.',
-        snackPosition: SnackPosition.TOP,
+        snackPosition: SnackPosition.BOTTOM,
       );
     }
   }

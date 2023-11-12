@@ -65,10 +65,10 @@ class BottomNavBar extends StatelessWidget {
           IconButton(
             onPressed: () {
               controller.changePage(3);
-              Get.toNamed('/profile');
+              Get.toNamed('/news');
             },
             icon: Icon(
-              UniconsLine.user,
+              UniconsLine.newspaper,
               color: controller.currentIndex == 3 ? Colors.white : inactive_accent,
             ),
           ),

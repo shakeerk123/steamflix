@@ -13,7 +13,11 @@ import 'package:steamflix/app/models/popular_movies_model.dart';
 class APIService {
   final Dio _dio = Dio();
   final String baseUrl = 'https://api.themoviedb.org/3';
-  final String apiKey = 'api_key=796afd257c58a2464f891db4b2769f00';
+  final String apiKey = 'api_key=';
+  
+
+
+
 
   Future<List<Results>> getPopularMovies() async {
     try {
@@ -32,6 +36,18 @@ class APIService {
     try {
       List<Results> movieList = [];
       final url = '$baseUrl/discover/movie?$apiKey&with_original_language=ml';
+      final response = await _dio.get(url);
+      var movies = response.data['results'] as List;
+      movieList = movies.map((m) => Results.fromJson(m)).toList();
+      return movieList;
+    } catch (error, stacktrace) {
+      throw Exception('Exception occured: $error with stacktrace: $stacktrace');
+    }
+  }
+  Future<List<Results>> getAnimated() async {
+    try {
+      List<Results> movieList = [];
+      final url = '$baseUrl/discover/movie?$apiKey&with_genres=16';
       final response = await _dio.get(url);
       var movies = response.data['results'] as List;
       movieList = movies.map((m) => Results.fromJson(m)).toList();
