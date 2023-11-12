@@ -7,11 +7,12 @@ import 'package:steamflix/app/views/news/details_screen.dart';
 class NewsCard extends StatelessWidget {
   final Article article;
 
-  const NewsCard({super.key, required this.article});
+  const NewsCard({Key? key, required this.article}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(color:  background_primary,
+    return Card(
+      color: background_primary,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -20,12 +21,14 @@ class NewsCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           CachedNetworkImage(
-            imageUrl: article.urlToImage.toString(),
+            imageUrl: article.urlToImage?.toString() ?? "",
             height: 160,
             width: double.infinity,
             fit: BoxFit.cover,
-            placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
+            placeholder: (context, url) =>
+                const Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) =>
+                const Icon(Icons.error, size: 160),
           ),
           Container(
             padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
@@ -42,7 +45,7 @@ class NewsCard extends StatelessWidget {
                 ),
                 Container(height: 10),
                 Text(
-                  article.description.toString(),
+                  article.description?.toString() ?? "No description available",
                   maxLines: 6,
                   style: const TextStyle(
                     fontSize: 12,

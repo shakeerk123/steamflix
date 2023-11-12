@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:steamflix/app/views/news/entertainment_news.dart';
+import 'package:steamflix/app/views/news/new_screen.dart';
 
-import 'package:steamflix/app/views/loginscreen.dart';
-import 'package:steamflix/app/views/home_screen.dart';
-import 'package:steamflix/app/views/moviescreen.dart';
-import 'package:steamflix/app/views/searchscreen.dart';
-import 'package:steamflix/app/views/tvshowscreen.dart';
-import 'package:steamflix/app/views/download.dart';
+import 'package:steamflix/app/views/login/loginscreen.dart';
+import 'package:steamflix/app/views/home/home_screen.dart';
+import 'package:steamflix/app/views/movie_detail/moviescreen.dart';
+import 'package:steamflix/app/views/search/searchscreen.dart';
+import 'package:steamflix/app/views/tvshow_detail/tvshowscreen.dart';
+import 'package:steamflix/app/views/download/download.dart';
 
 void main() {
   runApp(const MyApp());

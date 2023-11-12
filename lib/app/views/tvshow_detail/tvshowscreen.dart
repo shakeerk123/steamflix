@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
 import 'dart:developer';
+import 'dart:ui';
 
 
 import 'package:flutter/material.dart';
@@ -157,25 +158,49 @@ class _TVShowScreenState extends State<TVShowScreen> {
                                         fontWeight: FontWeight.w500,
                                         color: Colors.white),
                                   ),
-                                  Row(
-                                    children: [
-                                      circularButton(
-                                        UniconsLine.play,
-                                        onTap: () {
-                                          HapticFeedback.lightImpact();
-                                          APIService()
-                                              .getTrailerLink(
-                                                  snapshot.data!.id.toString(),
-                                                  "tv")
-                                              .then((value) =>
-                                                  playTrailer(context, value));
-                                        },
-                                      ),
-                                    ],
-                                  )
+                                 
                                 ],
                               ),
-                            )
+                            ),
+                            Positioned(
+                            width: size.width * 1.0,
+                            height: size.height * 0.4,
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      HapticFeedback.lightImpact();
+                                      APIService()
+                                          .getTrailerLink(
+                                              snapshot.data!.id.toString(),
+                                              "tv")
+                                          .then((value) =>
+                                              playTrailer(context, value));
+                                    },
+                                    child: ClipRect(
+                                        child: BackdropFilter(
+                                            filter: ImageFilter.blur(
+                                                sigmaX: 1.0, sigmaY: 1.0),
+                                            child: Container(
+                                              width: 60,
+                                              height: 60,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                color: white.withOpacity(0.5),
+                                              ),
+                                              child: const Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(UniconsLine.play)
+                                                ],
+                                              ),
+                                            ))),
+                                  )
+                                ]),
+                          ),
                           ],
                         ),
                         FutureBuilder(

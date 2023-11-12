@@ -7,27 +7,33 @@ import 'package:url_launcher/url_launcher.dart';
 
 class NewsDetailsScreen extends StatelessWidget {
   final Article article;
- 
 
-  const NewsDetailsScreen({super.key, required this.article});
- 
+  const NewsDetailsScreen({Key? key, required this.article}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-      
-       CustomScrollView(
+      body: CustomScrollView(
         slivers: [
           SliverAppBar(
             expandedHeight: 200.0,
             floating: false,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              
-              background: Image.network(
-                article.urlToImage.toString(),
-                fit: BoxFit.cover,
-              ),
+              background: article.urlToImage != null
+                  ? Image.network(
+                      article.urlToImage.toString(),
+                      fit: BoxFit.cover,
+                    )
+                  : const Center(
+                      child: Text(
+                        'No Image',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
             ),
           ),
           SliverToBoxAdapter(
@@ -52,14 +58,18 @@ class NewsDetailsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    article.description.toString(),
+                    article.description != null
+                        ? article.description.toString()
+                        : 'No description available',
                     style: const TextStyle(fontSize: 18, color: Colors.white),
                   ),
-                  const SizedBox(height: 40,),
-
-                  ElevatedButton(onPressed: (){
-                    _launchURL(article.url);
-                  }, child: const Text("Read more Online"))
+                  const SizedBox(height: 40),
+                  ElevatedButton(
+                    onPressed: () {
+                      _launchURL(article.url);
+                    },
+                    child: const Text("Read more Online"),
+                  )
                 ],
               ),
             ),
@@ -70,10 +80,11 @@ class NewsDetailsScreen extends StatelessWidget {
     );
   }
 }
+
 _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
+}

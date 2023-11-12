@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:steamflix/app/controller/fav_controller.dart';
 import 'package:steamflix/app/models/popular_movies_model.dart';
 import 'package:steamflix/app/services/api.dart';
 import 'package:steamflix/app/utils/consts.dart';
@@ -29,7 +28,7 @@ class MovieScreen extends StatefulWidget {
 class _MovieScreenState extends State<MovieScreen> {
   bool isLoading = true;
   late List<Results> recommendedMovies;
-  var watchlistController = Get.put(WatchlistController());
+ 
 
   @override
   void initState() {
@@ -72,23 +71,7 @@ class _MovieScreenState extends State<MovieScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       bottomNavigationBar: BottomNavBar(),
-      floatingActionButton:FloatingActionButton(
-        onPressed: () {
-          String movieId = widget.movieId;
-          if (watchlistController.isInWatchlist(movieId)) {
-            watchlistController.removeFromWatchlist(movieId);
-            Get.snackbar('Removed', 'Removed from Watchlist');
-          } else {
-            watchlistController.addToWatchlist(movieId);
-            Get.snackbar('Added', 'Added to Watchlist');
-          }
-        },
-        child: Obx(() => Icon(
-              watchlistController.isInWatchlist(widget.movieId)
-                  ? Icons.check
-                  : Icons.add,
-            )),
-      ),
+      
       backgroundColor: background_primary,
       body: isLoading
           ? const LoadingScreen()
