@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:steamflix/app/utils/consts.dart';
+import 'package:steamflix/utils/consts.dart';
 
 class LandingCard extends StatelessWidget {
   final ImageProvider image;

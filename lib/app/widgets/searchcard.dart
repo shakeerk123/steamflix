@@ -1,6 +1,6 @@
  
 import 'package:flutter/material.dart';
-import 'package:steamflix/app/utils/consts.dart';
+import 'package:steamflix/utils/consts.dart';
 
 class SearchCard extends StatelessWidget {
   final String title;

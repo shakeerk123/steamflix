@@ -2,7 +2,7 @@ import 'package:dotlottie_loader/dotlottie_loader.dart';
  
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:steamflix/app/utils/consts.dart';
+import 'package:steamflix/utils/consts.dart';
 
 class LoadingScreen extends StatelessWidget {
   const LoadingScreen({super.key});

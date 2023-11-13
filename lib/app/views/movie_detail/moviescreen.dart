@@ -1,20 +1,19 @@
 // ignore_for_file: deprecated_member_use
-
 import 'dart:developer';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:steamflix/app/models/popular_movies_model.dart';
 import 'package:steamflix/app/services/api.dart';
-import 'package:steamflix/app/utils/consts.dart';
+import 'package:steamflix/app/widgets/movie_detail_widgets/gradient.dart';
+import 'package:steamflix/app/widgets/movie_detail_widgets/play_button_blur.dart';
+import 'package:steamflix/utils/consts.dart';
 import 'package:steamflix/app/widgets/bottomnavbar.dart';
 import 'package:steamflix/app/widgets/customlistmovie.dart';
 import 'package:steamflix/app/widgets/loadingscreen.dart';
 import 'package:steamflix/app/widgets/textcontainer.dart';
 import 'package:steamflix/app/widgets/titletext.dart';
-import 'package:unicons/unicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MovieScreen extends StatefulWidget {
@@ -104,25 +103,7 @@ class _MovieScreenState extends State<MovieScreen> {
                               fit: BoxFit.cover,
                             )),
                           ),
-                          Container(
-                            width: size.width,
-                            height: size.height * 0.40 > 300
-                                ? size.height * 0.40
-                                : 300,
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.transparent,
-                                Colors.transparent,
-                                background_primary.withOpacity(0.50),
-                                background_primary.withOpacity(0.75),
-                                background_primary.withOpacity(0.90),
-                                background_primary.withOpacity(1.00),
-                              ],
-                            )),
-                          ),
+                          MovieGradient(size: size),
                           Positioned(
                             width: size.width * 1.0,
                             height: size.height * 0.4,
@@ -139,26 +120,7 @@ class _MovieScreenState extends State<MovieScreen> {
                                           .then((value) =>
                                               playTrailer(context, value));
                                     },
-                                    child: ClipRect(
-                                        child: BackdropFilter(
-                                            filter: ImageFilter.blur(
-                                                sigmaX: 1.0, sigmaY: 1.0),
-                                            child: Container(
-                                              width: 60,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                                color: white.withOpacity(0.5),
-                                              ),
-                                              child: const Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(UniconsLine.play)
-                                                ],
-                                              ),
-                                            ))),
+                                    child: const PlayButton(),
                                   )
                                 ]),
                           ),
@@ -253,8 +215,26 @@ class _MovieScreenState extends State<MovieScreen> {
                             const EdgeInsets.all(8),
                             const Color(0xFF0F1D39),
                           ),
-                          titleText('Recommendations'),
-                          CustomListMovie(popularMovies: recommendedMovies)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              titleText('Recommendations'),
+                              recommendedMovies != null &&
+                                      recommendedMovies.isNotEmpty
+                                  ? CustomListMovie(
+                                      popularMovies: recommendedMovies)
+                                  : const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'No recommendations available....',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                    ),
+                            ],
+                          ),
                         ],
                       )
                     ],

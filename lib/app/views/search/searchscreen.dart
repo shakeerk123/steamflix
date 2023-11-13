@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:lottie/lottie.dart';
 import 'package:steamflix/app/services/api.dart';
-import 'package:steamflix/app/utils/consts.dart';
+import 'package:steamflix/utils/consts.dart';
 import 'package:steamflix/app/widgets/bottomnavbar.dart';
 import 'package:steamflix/app/widgets/searchlist.dart';
 import 'package:unicons/unicons.dart';

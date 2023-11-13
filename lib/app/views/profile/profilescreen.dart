@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:steamflix/app/utils/consts.dart';
+import 'package:steamflix/utils/consts.dart';
 import 'package:steamflix/app/widgets/bottomnavbar.dart';
 
 

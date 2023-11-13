@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:steamflix/app/utils/consts.dart';
+import 'package:steamflix/utils/consts.dart';
 import 'package:steamflix/app/widgets/bottomnavbar.dart';
 import 'package:typethis/typethis.dart';
 import 'package:url_launcher/url_launcher.dart';

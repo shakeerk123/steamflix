@@ -1,22 +1,18 @@
 // ignore_for_file: deprecated_member_use, use_build_context_synchronously
-
 import 'dart:developer';
-import 'dart:ui';
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:steamflix/app/models/TvShow.dart';
 import 'package:steamflix/app/services/api.dart';
-import 'package:steamflix/app/utils/consts.dart';
-import 'package:steamflix/app/widgets/circularbutton.dart';
+import 'package:steamflix/app/widgets/movie_detail/gradient.dart';
+import 'package:steamflix/app/widgets/movie_detail_widgets/play_button_blur.dart';
+import 'package:steamflix/utils/consts.dart';
 import 'package:steamflix/app/widgets/customlistmovie.dart';
 import 'package:steamflix/app/widgets/loadingscreen.dart';
 import 'package:steamflix/app/widgets/seasonlist.dart';
 import 'package:steamflix/app/widgets/textcontainer.dart';
 import 'package:steamflix/app/widgets/titletext.dart';
-import 'package:unicons/unicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TVShowScreen extends StatefulWidget {
@@ -28,6 +24,7 @@ class TVShowScreen extends StatefulWidget {
 }
 
 class _TVShowScreenState extends State<TVShowScreen> {
+  var selectedSeason = 0;
   bool isLoading = true;
   late List<TvShow> recommendedTvShows;
   Future<void> playTrailer(BuildContext context, String trailerLink) async {
@@ -35,8 +32,6 @@ class _TVShowScreenState extends State<TVShowScreen> {
       if (await canLaunch(trailerLink)) {
         await launch(trailerLink);
       } else {
-        // Handle the case where the trailer link cannot be launched.
-        // You can show an error message to the user.
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Could not open the trailer link.'),
@@ -44,7 +39,6 @@ class _TVShowScreenState extends State<TVShowScreen> {
         );
       }
     } catch (e) {
-      // Handle exceptions while launching the trailer link.
       log('Error: $e');
     }
   }
@@ -63,7 +57,6 @@ class _TVShowScreenState extends State<TVShowScreen> {
     fetchData();
   }
 
-  var selectedSeason = 0;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -109,27 +102,7 @@ class _TVShowScreenState extends State<TVShowScreen> {
                                 ),
                               ),
                             ),
-                            Container(
-                              width: size.width,
-                              height: size.height * 0.40 > 300
-                                  ? size.height * 0.40
-                                  : 300,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Colors.transparent,
-                                      Colors.transparent,
-                                      background_primary.withOpacity(0.50),
-                                      background_primary.withOpacity(0.75),
-                                      background_primary.withOpacity(0.85),
-                                      background_primary.withOpacity(0.90),
-                                      background_primary.withOpacity(0.95),
-                                      background_primary.withOpacity(1.00)
-                                    ]),
-                              ),
-                            ),
+                            MovieGradient(size: size),
                             Container(
                               width: size.width,
                               height: size.height * 0.35 > 300
@@ -158,49 +131,28 @@ class _TVShowScreenState extends State<TVShowScreen> {
                                         fontWeight: FontWeight.w500,
                                         color: Colors.white),
                                   ),
-                                 
                                 ],
                               ),
                             ),
                             Positioned(
-                            width: size.width * 1.0,
-                            height: size.height * 0.4,
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      HapticFeedback.lightImpact();
-                                      APIService()
-                                          .getTrailerLink(
-                                              snapshot.data!.id.toString(),
-                                              "tv")
-                                          .then((value) =>
-                                              playTrailer(context, value));
-                                    },
-                                    child: ClipRect(
-                                        child: BackdropFilter(
-                                            filter: ImageFilter.blur(
-                                                sigmaX: 1.0, sigmaY: 1.0),
-                                            child: Container(
-                                              width: 60,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                                color: white.withOpacity(0.5),
-                                              ),
-                                              child: const Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Icon(UniconsLine.play)
-                                                ],
-                                              ),
-                                            ))),
-                                  )
-                                ]),
-                          ),
+                              width: size.width * 1.0,
+                              height: size.height * 0.4,
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                        onTap: () {
+                                          HapticFeedback.lightImpact();
+                                          APIService()
+                                              .getTrailerLink(
+                                                  snapshot.data!.id.toString(),
+                                                  "tv")
+                                              .then((value) =>
+                                                  playTrailer(context, value));
+                                        },
+                                        child: const PlayButton())
+                                  ]),
+                            ),
                           ],
                         ),
                         FutureBuilder(
@@ -291,8 +243,25 @@ class _TVShowScreenState extends State<TVShowScreen> {
                             SeasonList(
                                 seasonNumber: selectedSeason + 1,
                                 movieId: widget.movieId),
-                            titleText("Recommendations"),
-                            CustomListTv(data: recommendedTvShows),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                titleText('Recommendations'),
+                                recommendedTvShows != null &&
+                                        recommendedTvShows.isNotEmpty
+                                    ? CustomListTv(data: recommendedTvShows)
+                                    : const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text(
+                                          'No recommendations available....',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                          ),
+                                        ),
+                                      ),
+                              ],
+                            ),
                           ],
                         )
                       ]);

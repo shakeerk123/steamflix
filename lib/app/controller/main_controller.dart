@@ -6,16 +6,14 @@ import 'package:steamflix/app/models/article_model.dart';
 import 'package:steamflix/app/models/popular_movies_model.dart';
 import 'package:steamflix/app/services/api.dart';
 import 'package:steamflix/app/services/new_api.dart';
- 
+
 class MainController extends GetxController {
   var isVisible = true.obs;
   var isLoading = true.obs;
   var currentIndex = 0.obs;
   final futureArticles = <Article>[].obs;
 
-
   var popularMovies = <Results>[].obs;
- 
   var animatedMovies = <Results>[].obs;
   var malayalamMovies = <Results>[].obs;
   var topRatedMovie = <Results>[].obs;
@@ -39,12 +37,13 @@ class MainController extends GetxController {
     nowPLayingMovie.value = await APIService().getNowPLayingMovie();
     animatedMovies.value = await APIService().getAnimated();
 
-
     isLoading.value = false;
   }
-   void onTap(int index) {
+
+  void onTap(int index) {
     currentIndex.value = index;
   }
+
   Future<void> fetchArticles() async {
     try {
       var articles = await NewsService().getEntertainmentNews();
@@ -53,6 +52,4 @@ class MainController extends GetxController {
       log('Error fetching articles: $error');
     }
   }
- 
 }
-

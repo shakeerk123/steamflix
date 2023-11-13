@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:steamflix/app/models/article_model.dart';
-import 'package:steamflix/app/utils/consts.dart';
+import 'package:steamflix/utils/consts.dart';
 import 'package:steamflix/app/views/news/details_screen.dart';
 
 class NewsCard extends StatelessWidget {
