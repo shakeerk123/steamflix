@@ -27,7 +27,7 @@ class NewsDetailsScreen extends StatelessWidget {
                     )
                   : const Center(
                       child: Text(
-                        'No Image',
+                        'No Image Available',
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.white,

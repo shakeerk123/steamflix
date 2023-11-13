@@ -28,7 +28,6 @@ class MovieScreen extends StatefulWidget {
 class _MovieScreenState extends State<MovieScreen> {
   bool isLoading = true;
   late List<Results> recommendedMovies;
- 
 
   @override
   void initState() {
@@ -71,7 +70,6 @@ class _MovieScreenState extends State<MovieScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       bottomNavigationBar: BottomNavBar(),
-      
       backgroundColor: background_primary,
       body: isLoading
           ? const LoadingScreen()
@@ -107,7 +105,7 @@ class _MovieScreenState extends State<MovieScreen> {
                             )),
                           ),
                           Container(
-                            width: size.width ,
+                            width: size.width,
                             height: size.height * 0.40 > 300
                                 ? size.height * 0.40
                                 : 300,
@@ -124,41 +122,6 @@ class _MovieScreenState extends State<MovieScreen> {
                                 background_primary.withOpacity(1.00),
                               ],
                             )),
-                          ),
-                          Container(
-                            width: size.width,
-                            height: size.height * 0.35 > 300
-                                ? size.height * 0.35
-                                : 300,
-                            margin: const EdgeInsets.all(8),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                               
-
-                                Text(
-                                  snapshot.data!.voteAverage
-                                      .toString()
-                                      .substring(0, 3),
-                                  style: const TextStyle(
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  snapshot.data!.title.toString(),
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
-                            ),
                           ),
                           Positioned(
                             width: size.width * 1.0,
@@ -200,6 +163,36 @@ class _MovieScreenState extends State<MovieScreen> {
                                 ]),
                           ),
                         ],
+                      ),
+                      Container(
+                        width: size.width,
+                        margin: const EdgeInsets.all(8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              snapshot.data!.voteAverage
+                                  .toString()
+                                  .substring(0, 3),
+                              style: const TextStyle(
+                                fontSize: 40,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              snapshot.data!.title.toString(),
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
                       ),
                       FutureBuilder(
                         future: APIService()

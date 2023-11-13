@@ -6,6 +6,7 @@ import 'package:steamflix/app/views/login/loginscreen.dart';
 import 'package:steamflix/app/views/home/home_screen.dart';
 import 'package:steamflix/app/views/movie_detail/moviescreen.dart';
 import 'package:steamflix/app/views/search/searchscreen.dart';
+import 'package:steamflix/app/views/splash/splash_screen.dart';
 import 'package:steamflix/app/views/tvshow_detail/tvshowscreen.dart';
 import 'package:steamflix/app/views/download/download.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: SplashScreen(),
       getPages: [
         //  GetPage(name: '/', page: () => const NavScreen()),
         GetPage(name: '/login', page: () => const LoginScreen()),
