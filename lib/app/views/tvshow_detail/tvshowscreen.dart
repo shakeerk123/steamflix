@@ -1,11 +1,12 @@
 // ignore_for_file: deprecated_member_use, use_build_context_synchronously
+
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:steamflix/app/models/TvShow.dart';
 import 'package:steamflix/app/services/api.dart';
-import 'package:steamflix/app/widgets/movie_detail/gradient.dart';
+import 'package:steamflix/app/widgets/movie_detail_widgets/gradient.dart';
 import 'package:steamflix/app/widgets/movie_detail_widgets/play_button_blur.dart';
 import 'package:steamflix/utils/consts.dart';
 import 'package:steamflix/app/widgets/customlistmovie.dart';
@@ -24,7 +25,6 @@ class TVShowScreen extends StatefulWidget {
 }
 
 class _TVShowScreenState extends State<TVShowScreen> {
-  var selectedSeason = 0;
   bool isLoading = true;
   late List<TvShow> recommendedTvShows;
   Future<void> playTrailer(BuildContext context, String trailerLink) async {
@@ -32,6 +32,8 @@ class _TVShowScreenState extends State<TVShowScreen> {
       if (await canLaunch(trailerLink)) {
         await launch(trailerLink);
       } else {
+        // Handle the case where the trailer link cannot be launched.
+        // You can show an error message to the user.
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Could not open the trailer link.'),
@@ -39,6 +41,7 @@ class _TVShowScreenState extends State<TVShowScreen> {
         );
       }
     } catch (e) {
+      // Handle exceptions while launching the trailer link.
       log('Error: $e');
     }
   }
@@ -57,6 +60,7 @@ class _TVShowScreenState extends State<TVShowScreen> {
     fetchData();
   }
 
+  var selectedSeason = 0;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -114,23 +118,14 @@ class _TVShowScreenState extends State<TVShowScreen> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
-                                    snapshot.data!.voteAverage
-                                        .toString()
-                                        .substring(0, 3),
-                                    style: const TextStyle(
-                                        fontSize: 40,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white),
-                                  ),
-                                  Text(
-                                    snapshot.data!.name.toString(),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                    style: const TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white),
-                                  ),
+                                      snapshot.data!.voteAverage
+                                          .toString()
+                                          .substring(0, 3),
+                                      style: voteAvg),
+                                  Text(snapshot.data!.name.toString(),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: name),
                                 ],
                               ),
                             ),

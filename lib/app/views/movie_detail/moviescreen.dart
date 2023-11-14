@@ -18,7 +18,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MovieScreen extends StatefulWidget {
   final String movieId;
-  const MovieScreen({super.key, required this.movieId});
+  const MovieScreen({Key? key, required this.movieId}) : super(key: key);
 
   @override
   State<MovieScreen> createState() => _MovieScreenState();
@@ -52,7 +52,6 @@ class _MovieScreenState extends State<MovieScreen> {
       if (await canLaunch(trailerLink)) {
         await launch(trailerLink);
       } else {
-        // ignore: use_build_context_synchronously
         Get.snackbar(
           'Error',
           'Could not open the trailer link.',
@@ -94,35 +93,38 @@ class _MovieScreenState extends State<MovieScreen> {
                                 ? size.height * 0.40
                                 : 300,
                             decoration: BoxDecoration(
-                                image: DecorationImage(
-                              image: snapshot.data!.backdropPath == null
-                                  ? const AssetImage('assets/LoadingImage.png')
-                                      as ImageProvider
-                                  : NetworkImage(
-                                      "https://image.tmdb.org/t/p/original${snapshot.data!.backdropPath}"),
-                              fit: BoxFit.cover,
-                            )),
+                              image: DecorationImage(
+                                image: snapshot.data!.backdropPath == null
+                                    ? const AssetImage(
+                                            'assets/LoadingImage.png')
+                                        as ImageProvider
+                                    : NetworkImage(
+                                        "https://image.tmdb.org/t/p/original${snapshot.data!.backdropPath}"),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                           MovieGradient(size: size),
                           Positioned(
                             width: size.width * 1.0,
                             height: size.height * 0.4,
                             child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      HapticFeedback.lightImpact();
-                                      APIService()
-                                          .getTrailerLink(
-                                              snapshot.data!.id.toString(),
-                                              "movie")
-                                          .then((value) =>
-                                              playTrailer(context, value));
-                                    },
-                                    child: const PlayButton(),
-                                  )
-                                ]),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    HapticFeedback.lightImpact();
+                                    APIService()
+                                        .getTrailerLink(
+                                            snapshot.data!.id.toString(),
+                                            "movie")
+                                        .then((value) =>
+                                            playTrailer(context, value));
+                                  },
+                                  child: const PlayButton(),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -137,19 +139,11 @@ class _MovieScreenState extends State<MovieScreen> {
                               snapshot.data!.voteAverage
                                   .toString()
                                   .substring(0, 3),
-                              style: const TextStyle(
-                                fontSize: 40,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                              ),
+                              style: voteAvg,
                             ),
                             Text(
                               snapshot.data!.title.toString(),
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white,
-                              ),
+                              style: name,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -172,17 +166,19 @@ class _MovieScreenState extends State<MovieScreen> {
                                 itemCount: snapshot.data.length,
                                 itemBuilder: (context, index) {
                                   return textContainer(
-                                      snapshot.data![index].name.toString(),
-                                      const EdgeInsets.only(right: 8),
-                                      const Color(0xFF14303B));
+                                    snapshot.data![index].name.toString(),
+                                    const EdgeInsets.only(right: 8),
+                                    const Color(0xFF14303B),
+                                  );
                                 },
                               ),
                             );
                           } else {
                             return textContainer(
-                                'Loading',
-                                const EdgeInsets.only(right: 8),
-                                const Color(0xFF14303B));
+                              'Loading',
+                              const EdgeInsets.only(right: 8),
+                              const Color(0xFF14303B),
+                            );
                           }
                         },
                       ),
@@ -219,6 +215,7 @@ class _MovieScreenState extends State<MovieScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               titleText('Recommendations'),
+                              // ignore: unnecessary_null_comparison
                               recommendedMovies != null &&
                                       recommendedMovies.isNotEmpty
                                   ? CustomListMovie(
@@ -227,10 +224,7 @@ class _MovieScreenState extends State<MovieScreen> {
                                       padding: EdgeInsets.all(8.0),
                                       child: Text(
                                         'No recommendations available....',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16.0,
-                                        ),
+                                        style: noRecom,
                                       ),
                                     ),
                             ],

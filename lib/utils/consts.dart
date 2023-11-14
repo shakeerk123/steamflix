@@ -16,3 +16,20 @@ Color accentT = const Color(0xFF34323A);
 Color inactiveAccent = const Color(0xFF494949);
 Color accentSecondary = const Color(0xFF00FFD1);
 Color iconColors = Colors.white;
+
+const TextStyle voteAvg = TextStyle(
+  color: Colors.white,
+  fontSize: 40,
+  fontWeight: FontWeight.w500,
+);
+
+const TextStyle name = TextStyle(
+  color: Colors.white,
+  fontSize: 24,
+  fontWeight: FontWeight.w500,
+);
+
+const TextStyle noRecom = TextStyle(
+  color: Colors.white,
+  fontSize: 16.0,
+);

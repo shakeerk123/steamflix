@@ -13,7 +13,7 @@ import 'package:steamflix/app/models/popular_movies_model.dart';
 class APIService {
   final Dio _dio = Dio();
   final String baseUrl = 'https://api.themoviedb.org/3';
-  final String apiKey = 'api_key=796afd257c58a2464f891db4b2769f00';
+  final String apiKey = 'api_key=';
   
 
 
