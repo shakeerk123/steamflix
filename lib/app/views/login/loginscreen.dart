@@ -54,7 +54,7 @@ class LoginScreen extends StatelessWidget {
           Container(
             margin: const EdgeInsets.fromLTRB(28, 0, 28, 24),
             child: const Text(
-              'Sign in to access and save your personal movie and show collection on FilmFusion. Start your journey through the world of film and television today!',
+              'Sign in to access and save your personal movie and show collection on StreamFlix. Start your journey through the world of film and television today!',
               textAlign: TextAlign.center,
               style: TextStyle(color: Color(0xFF423E50)),
             ),

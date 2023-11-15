@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "656030408311",
+    "project_id": "streamflix-f7242",
+    "storage_bucket": "streamflix-f7242.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656030408311:android:264115661a4effb32eb072",
+        "android_client_info": {
+          "package_name": "com.example.steamflix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvq71ZPd6EjGFL0tx12WNxWU6DlgQO-Jo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

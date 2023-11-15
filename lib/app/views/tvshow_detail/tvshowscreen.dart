@@ -242,6 +242,7 @@ class _TVShowScreenState extends State<TVShowScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 titleText('Recommendations'),
+                                // ignore: unnecessary_null_comparison
                                 recommendedTvShows != null &&
                                         recommendedTvShows.isNotEmpty
                                     ? CustomListTv(data: recommendedTvShows)
