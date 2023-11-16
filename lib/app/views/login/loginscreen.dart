@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:steamflix/app/services/google_services.dart';
+import 'package:steamflix/app/views/splash/splash_screen.dart';
 import 'package:steamflix/utils/consts.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -32,8 +35,9 @@ class LoginScreen extends StatelessWidget {
               width: double.infinity,
               height: 72,
               child: ElevatedButton.icon(
-                onPressed: () {
-                  
+                onPressed: () async{
+                 await FirebaseServices().signInWithGoolge();
+                 Get.off( SplashScreen());
                 },
                 icon: const Icon(
                   FontAwesomeIcons.google,
