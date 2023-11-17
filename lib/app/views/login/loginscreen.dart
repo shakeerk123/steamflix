@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
               child: ElevatedButton.icon(
                 onPressed: () async{
                  await FirebaseServices().signInWithGoolge();
-                 Get.off( SplashScreen());
+                 Get.off( const SplashScreen());
                 },
                 icon: const Icon(
                   FontAwesomeIcons.google,

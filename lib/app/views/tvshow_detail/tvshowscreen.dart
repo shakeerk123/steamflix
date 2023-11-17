@@ -32,8 +32,6 @@ class _TVShowScreenState extends State<TVShowScreen> {
       if (await canLaunch(trailerLink)) {
         await launch(trailerLink);
       } else {
-        // Handle the case where the trailer link cannot be launched.
-        // You can show an error message to the user.
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Could not open the trailer link.'),
@@ -41,7 +39,7 @@ class _TVShowScreenState extends State<TVShowScreen> {
         );
       }
     } catch (e) {
-      // Handle exceptions while launching the trailer link.
+      
       log('Error: $e');
     }
   }

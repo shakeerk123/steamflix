@@ -12,6 +12,7 @@ class MainController extends GetxController {
   var isLoading = true.obs;
   var currentIndex = 0.obs;
   final futureArticles = <Article>[].obs;
+  RxSet<String> wishlist = <String>{}.obs;
 
   var popularMovies = <Results>[].obs;
   var animatedMovies = <Results>[].obs;
@@ -26,6 +27,22 @@ class MainController extends GetxController {
     super.onInit();
     fetchData();
     fetchArticles();
+  }
+  // Check if a movie/show is in the wishlist
+  bool isInWishlist(String id) => wishlist.contains(id);
+
+  // Add to wishlist
+  void addToWishlist(String id) {
+    if (!wishlist.contains(id)) {
+      wishlist.add(id);
+      update(); // Notify listeners about the change
+    }
+  }
+
+  // Remove from wishlist
+  void removeFromWishlist(String id) {
+    wishlist.remove(id);
+    update(); // Notify listeners about the change
   }
 
   Future<void> fetchData() async {

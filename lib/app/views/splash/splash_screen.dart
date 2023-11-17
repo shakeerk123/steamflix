@@ -63,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen>
               const Center(child: SplashAnimation()),
               Column(
                 children: [
-                  SizedBox(height: 100,),
+                  const SizedBox(height: 100,),
                   SizedBox(
                     width: 180,
                     height: 180,

@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
         () => mainController.isLoading.value
             ? const LoadingScreen()
             : Container(
-                height: size.height,
+                height: size.height ,
                 width: size.width,
                 color: background_primary,
                 child: ListView(

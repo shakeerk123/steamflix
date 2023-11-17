@@ -72,6 +72,16 @@ class BottomNavBar extends StatelessWidget {
               color: controller.currentIndex == 3 ? Colors.white : inactive_accent,
             ),
           ),
+           IconButton(
+            onPressed: () {
+              controller.changePage(4);
+              Get.toNamed('/profile');
+            },
+            icon: Icon(
+              UniconsLine.user,
+              color: controller.currentIndex == 4 ? Colors.white : inactive_accent,
+            ),
+          ),
         ],
       ),
     );

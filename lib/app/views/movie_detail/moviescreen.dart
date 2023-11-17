@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:steamflix/app/controller/main_controller.dart';
 import 'package:steamflix/app/models/popular_movies_model.dart';
 import 'package:steamflix/app/services/api.dart';
 import 'package:steamflix/app/widgets/movie_detail_widgets/gradient.dart';
@@ -18,13 +19,15 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MovieScreen extends StatefulWidget {
   final String movieId;
-  const MovieScreen({Key? key, required this.movieId}) : super(key: key);
+
+  MovieScreen({Key? key, required this.movieId}) : super(key: key);
 
   @override
   State<MovieScreen> createState() => _MovieScreenState();
 }
 
 class _MovieScreenState extends State<MovieScreen> {
+  final MainController mainController = Get.put(MainController());
   bool isLoading = true;
   late List<Results> recommendedMovies;
 
@@ -67,6 +70,20 @@ class _MovieScreenState extends State<MovieScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (mainController.isInWishlist(widget.movieId)) {
+            mainController.removeFromWishlist(widget.movieId);
+          } else {
+            mainController.addToWishlist(widget.movieId);
+          }
+        },
+        child: Obx(() => Icon(
+              mainController.isInWishlist(widget.movieId)
+                  ? Icons.favorite
+                  : Icons.favorite_border,
+            )),
+      ),
       bottomNavigationBar: BottomNavBar(),
       backgroundColor: background_primary,
       body: isLoading

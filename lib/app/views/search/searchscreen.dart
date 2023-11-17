@@ -1,7 +1,5 @@
- 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:lottie/lottie.dart';
 import 'package:steamflix/app/services/api.dart';
 import 'package:steamflix/utils/consts.dart';
@@ -17,28 +15,16 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  bool isVisible = true;
   bool isLoading = true;
   final ScrollController _scrollController = ScrollController();
   final myController = TextEditingController();
   String query = "";
 
   @override
-  
-
   @override
   void dispose() {
     super.dispose();
     myController.dispose();
-   
-  }
-
-  void hide() {
-    if (isVisible) {
-      setState(() {
-        isVisible = false;
-      });
-    }
   }
 
   @override
@@ -53,7 +39,6 @@ class _SearchScreenState extends State<SearchScreen> {
         bottomNavigationBar: BottomNavBar(),
         resizeToAvoidBottomInset: false,
         backgroundColor: background_primary,
-        
         extendBody: true,
         body: Stack(
           alignment: AlignmentDirectional.topStart,

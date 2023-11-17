@@ -6,18 +6,11 @@ import 'package:steamflix/app/models/TvShow.dart';
 import 'package:steamflix/app/models/TvShowDetail.dart';
 import 'package:steamflix/app/models/VideoDetails.dart';
 import 'package:steamflix/app/models/popular_movies_model.dart';
- 
- 
-
 
 class APIService {
   final Dio _dio = Dio();
   final String baseUrl = 'https://api.themoviedb.org/3';
-  final String apiKey = 'api_key=';
-  
-
-
-
+  final String apiKey = 'api_key=796afd257c58a2464f891db4b2769f00';
 
   Future<List<Results>> getPopularMovies() async {
     try {
@@ -44,6 +37,7 @@ class APIService {
       throw Exception('Exception occured: $error with stacktrace: $stacktrace');
     }
   }
+
   Future<List<Results>> getAnimated() async {
     try {
       List<Results> movieList = [];
@@ -231,6 +225,4 @@ class APIService {
           'Exception accoured: $error with stacktrace: $stacktrace');
     }
   }
-
-
 }
