@@ -2,6 +2,9 @@ import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:steamflix/app/services/google_services.dart';
+import 'package:steamflix/app/views/login/loginscreen.dart';
 import 'package:steamflix/app/widgets/bottomnavbar.dart';
 import 'package:steamflix/utils/consts.dart';
 
@@ -61,7 +64,12 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
+            IconButton(onPressed: ()async{
+            await  FirebaseServices().signOut();
+            Get.off( const LoginScreen());
+            }, icon: const Icon(Icons.logout,color: Colors.white,))
           ],
         ));
   }
 }
+
