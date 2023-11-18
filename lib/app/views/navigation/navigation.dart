@@ -17,7 +17,7 @@ class _NavScreenState extends State<NavScreen> {
       body: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return snapshot.hasData ?  SplashScreen() : const LoginScreen();
+          return snapshot.hasData ?  const SplashScreen() : const LoginScreen();
         },
       ),
     );

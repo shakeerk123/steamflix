@@ -5,11 +5,13 @@ import 'package:steamflix/app/controller/main_controller.dart';
 class WishlistPage extends StatelessWidget {
   final MainController mainController = Get.put(MainController());
 
+   WishlistPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Wishlist'),
+        title: const Text('Wishlist'),
       ),
       body: Obx(
         () => ListView.builder(

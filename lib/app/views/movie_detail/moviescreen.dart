@@ -20,7 +20,7 @@ import 'package:url_launcher/url_launcher.dart';
 class MovieScreen extends StatefulWidget {
   final String movieId;
 
-  MovieScreen({Key? key, required this.movieId}) : super(key: key);
+  const MovieScreen({Key? key, required this.movieId}) : super(key: key);
 
   @override
   State<MovieScreen> createState() => _MovieScreenState();

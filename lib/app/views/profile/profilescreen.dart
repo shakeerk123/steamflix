@@ -42,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
                   child: CircleAvatar(
                     radius: 50,
                     backgroundImage: NetworkImage(
-                        '${FirebaseAuth.instance.currentUser!.photoURL!}'),
+                        FirebaseAuth.instance.currentUser!.photoURL!),
                   ),
                 ),
               ],
