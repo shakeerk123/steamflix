@@ -25,17 +25,11 @@ class ProfileScreen extends StatelessWidget {
               clipBehavior: Clip.none,
               alignment: Alignment.center,
               children: [
-                BackdropFilter(
-                  filter: ImageFilter.blur(
-                      sigmaX: 5,
-                      sigmaY:
-                          5), // Adjust sigmaX and sigmaY for the desired blur effect
-                  child: Image.network(
-                    "https://wallpaperaccess.com/full/427852.jpg",
-                    height: h / 3,
-                    fit: BoxFit
-                        .cover, // Make sure the image covers the entire area
-                  ),
+                Image.asset(
+                  "assets/profile_background.jpg",
+                  height: h / 5,
+                  fit: BoxFit
+                      .cover, // Make sure the image covers the entire area
                 ),
                 Positioned(
                   bottom: -40,

@@ -29,19 +29,19 @@ class MainController extends GetxController {
     fetchArticles();
   }
   // Check if a movie/show is in the wishlist
-  bool isInWishlist(String id) => wishlist.contains(id);
+  bool isInWishlist(String movieId) => wishlist.contains(movieId);
 
   // Add to wishlist
-  void addToWishlist(String id) {
-    if (!wishlist.contains(id)) {
-      wishlist.add(id);
+  void addToWishlist(String movieId) {
+    if (!wishlist.contains(movieId)) {
+      wishlist.add(movieId);
       update(); // Notify listeners about the change
     }
   }
 
   // Remove from wishlist
-  void removeFromWishlist(String id) {
-    wishlist.remove(id);
+  void removeFromWishlist(String movieId) {
+    wishlist.remove(movieId);
     update(); // Notify listeners about the change
   }
 

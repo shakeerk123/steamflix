@@ -3,6 +3,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:steamflix/app/models/TvShow.dart';
 import 'package:steamflix/app/services/api.dart';
@@ -16,6 +17,8 @@ import 'package:steamflix/app/widgets/textcontainer.dart';
 import 'package:steamflix/app/widgets/titletext.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../controller/main_controller.dart';
+
 class TVShowScreen extends StatefulWidget {
   const TVShowScreen(this.movieId, {super.key});
   final String movieId;
@@ -25,6 +28,7 @@ class TVShowScreen extends StatefulWidget {
 }
 
 class _TVShowScreenState extends State<TVShowScreen> {
+   final MainController mainController = Get.put(MainController());
   bool isLoading = true;
   late List<TvShow> recommendedTvShows;
   Future<void> playTrailer(BuildContext context, String trailerLink) async {
@@ -62,7 +66,7 @@ class _TVShowScreenState extends State<TVShowScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
+    return Scaffold( 
       backgroundColor: background_primary,
       body: isLoading
           ? const LoadingScreen()

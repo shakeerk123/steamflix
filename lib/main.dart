@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:steamflix/app/views/navigation/navigation.dart';
+import 'package:steamflix/app/views/download/tab_screen.dart';
 import 'package:steamflix/app/views/news/new_screen.dart';
 import 'package:steamflix/app/views/login/loginscreen.dart';
 import 'package:steamflix/app/views/home/home_screen.dart';
@@ -12,6 +12,7 @@ import 'package:steamflix/app/views/search/searchscreen.dart';
 import 'package:steamflix/app/views/splash/splash_screen.dart';
 import 'package:steamflix/app/views/tvshow_detail/tvshowscreen.dart';
 import 'package:steamflix/app/views/download/download.dart';
+import 'package:steamflix/app/views/wishlist.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'StramFlix',
+      title: 'StreamFlix',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -46,12 +47,11 @@ class MyApp extends StatelessWidget {
         },
       ),
       getPages: [
-        GetPage(name: '/', page: () => const NavScreen()),
         GetPage(name: '/login', page: () => const LoginScreen()),
         GetPage(name: '/main', page: () => HomeScreen()),
         GetPage(name: '/search', page: () => const SearchScreen()),
         GetPage(name: '/news', page: () => NewsHomeScreen()),
-        GetPage(name: '/profile', page: () => const ProfileScreen()),
+        GetPage(name: '/profile', page: () =>  WishlistPage()),
         GetPage(
           name: '/download',
           page: () => const DownloadScreen(),

@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
- 
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:steamflix/app/models/SearchResult.dart';
 import 'package:steamflix/app/widgets/searchcard.dart';
-
 
 class SearchList extends StatefulWidget {
   final ScrollController scrollController;
@@ -39,9 +38,9 @@ class _SearchListState extends State<SearchList> {
                   var url = snapshot.data![index].posterPath;
                   return GestureDetector(
                     onTap: () {
-  HapticFeedback.mediumImpact();
-  Get.toNamed('/movie/${snapshot.data![index].id}');
-},
+                      HapticFeedback.mediumImpact();
+                      Get.toNamed('/movie/${snapshot.data![index].id}');
+                    },
                     child: SearchCard(
                       title: snapshot.data![index].title.toString(),
                       image: url == null
