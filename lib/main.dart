@@ -2,17 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:steamflix/app/views/download/tab_screen.dart';
+import 'package:steamflix/app/views/bottombar/bottam_bar.dart';
 import 'package:steamflix/app/views/news/new_screen.dart';
 import 'package:steamflix/app/views/login/loginscreen.dart';
-import 'package:steamflix/app/views/home/home_screen.dart';
 import 'package:steamflix/app/views/movie_detail/moviescreen.dart';
 import 'package:steamflix/app/views/profile/profilescreen.dart';
 import 'package:steamflix/app/views/search/searchscreen.dart';
 import 'package:steamflix/app/views/splash/splash_screen.dart';
 import 'package:steamflix/app/views/tvshow_detail/tvshowscreen.dart';
 import 'package:steamflix/app/views/download/download.dart';
-import 'package:steamflix/app/views/wishlist.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,10 +46,10 @@ class MyApp extends StatelessWidget {
       ),
       getPages: [
         GetPage(name: '/login', page: () => const LoginScreen()),
-        GetPage(name: '/main', page: () => HomeScreen()),
+        GetPage(name: '/main', page: () => const MainPage()),
         GetPage(name: '/search', page: () => const SearchScreen()),
         GetPage(name: '/news', page: () => NewsHomeScreen()),
-        GetPage(name: '/profile', page: () =>  WishlistPage()),
+        GetPage(name: '/profile', page: () =>  const ProfileScreen()),
         GetPage(
           name: '/download',
           page: () => const DownloadScreen(),

@@ -69,4 +69,5 @@ class MainController extends GetxController {
       log('Error fetching articles: $error');
     }
   }
+  
 }

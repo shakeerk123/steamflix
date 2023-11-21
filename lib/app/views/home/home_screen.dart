@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:steamflix/app/controller/main_controller.dart';
 import 'package:steamflix/utils/consts.dart';
-import 'package:steamflix/app/widgets/bottomnavbar.dart';
 import 'package:steamflix/app/widgets/customcarouselslider.dart';
 import 'package:steamflix/app/widgets/customlistmovie.dart';
 import 'package:steamflix/app/widgets/loadingscreen.dart';
@@ -18,7 +17,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: BottomNavBar(),
+      
       extendBody: true,
       body: Obx(
         () => mainController.isLoading.value

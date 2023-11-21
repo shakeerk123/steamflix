@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:steamflix/utils/consts.dart';
-import 'package:steamflix/app/widgets/bottomnavbar.dart';
+
 import 'package:typethis/typethis.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -17,7 +17,7 @@ class DownloadScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: BottomNavBar(),
+     
       backgroundColor: background_primary,
       body: Stack(
         alignment: AlignmentDirectional.topStart,

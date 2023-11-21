@@ -10,7 +10,7 @@ import 'package:steamflix/app/services/api.dart';
 import 'package:steamflix/app/widgets/movie_detail_widgets/gradient.dart';
 import 'package:steamflix/app/widgets/movie_detail_widgets/play_button_blur.dart';
 import 'package:steamflix/utils/consts.dart';
-import 'package:steamflix/app/widgets/bottomnavbar.dart';
+
 import 'package:steamflix/app/widgets/customlistmovie.dart';
 import 'package:steamflix/app/widgets/loadingscreen.dart';
 import 'package:steamflix/app/widgets/textcontainer.dart';
@@ -84,7 +84,7 @@ class _MovieScreenState extends State<MovieScreen> {
                   : Icons.favorite_border,
             )),
       ),
-      bottomNavigationBar: BottomNavBar(),
+      
       backgroundColor: background_primary,
       body: isLoading
           ? const LoadingScreen()

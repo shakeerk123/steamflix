@@ -1,11 +1,10 @@
-import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:steamflix/app/services/google_services.dart';
 import 'package:steamflix/app/views/login/loginscreen.dart';
-import 'package:steamflix/app/widgets/bottomnavbar.dart';
+
 import 'package:steamflix/utils/consts.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -16,7 +15,7 @@ class ProfileScreen extends StatelessWidget {
     final h = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: background_primary,
-        bottomNavigationBar: BottomNavBar(),
+        
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

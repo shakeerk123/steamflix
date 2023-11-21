@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:steamflix/app/services/api.dart';
 import 'package:steamflix/utils/consts.dart';
-import 'package:steamflix/app/widgets/bottomnavbar.dart';
 import 'package:steamflix/app/widgets/searchlist.dart';
 import 'package:unicons/unicons.dart';
 
@@ -36,7 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
         return false;
       },
       child: Scaffold(
-        bottomNavigationBar: BottomNavBar(),
+       
         resizeToAvoidBottomInset: false,
         backgroundColor: background_primary,
         extendBody: true,
@@ -48,44 +47,46 @@ class _SearchScreenState extends State<SearchScreen> {
               fit: BoxFit.fitWidth,
               width: size.width,
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 50,
-                  margin: const EdgeInsets.fromLTRB(8, 28, 8, 0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: accent_t.withOpacity(0.95),
-                  ),
-                  child: TextField(
-                    controller: myController,
-                    cursorColor: accent_secondary,
-                    maxLines: 1,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
+            SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 50,
+                    margin: const EdgeInsets.fromLTRB(8, 28, 8, 0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: accent_t.withOpacity(0.95),
                     ),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(
-                        UniconsLine.search,
+                    child: TextField(
+                      controller: myController,
+                      cursorColor: accent_secondary,
+                      maxLines: 1,
+                      style: const TextStyle(
                         color: Colors.white,
+                        fontSize: 20,
                       ),
-                      prefixIconColor: Colors.white,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        prefixIcon: Icon(
+                          UniconsLine.search,
+                          color: Colors.white,
+                        ),
+                        prefixIconColor: Colors.white,
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          query = myController.text;
+                        });
+                      },
                     ),
-                    onChanged: (value) {
-                      setState(() {
-                        query = myController.text;
-                      });
-                    },
                   ),
-                ),
-                SearchList(
-                    future: APIService().getSearchResult(query),
-                    scrollController: _scrollController),
-              ],
+                  SearchList(
+                      future: APIService().getSearchResult(query),
+                      scrollController: _scrollController),
+                ],
+              ),
             ),
             if (query == "")
               Align(

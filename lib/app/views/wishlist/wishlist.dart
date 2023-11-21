@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:steamflix/app/controller/main_controller.dart';
 import 'package:steamflix/app/services/api.dart';
-import 'package:steamflix/app/widgets/bottomnavbar.dart';
+
 import 'package:steamflix/app/widgets/loadingscreen.dart';
 import 'package:steamflix/utils/consts.dart';
  
@@ -15,7 +15,7 @@ class WishlistPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     bottomNavigationBar: BottomNavBar(),
+     
       backgroundColor: background_primary,
       body: Obx(
         () => ListView.builder(
@@ -51,7 +51,6 @@ class WishlistPage extends StatelessWidget {
   }
 
   void _handleItemTap(String movieId) {
-    print('Tapped on item with ID: $movieId');
     Get.toNamed('/movie/$movieId');
   }
 }
