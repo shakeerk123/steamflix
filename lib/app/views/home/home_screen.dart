@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:steamflix/app/controller/main_controller.dart';
+import 'package:steamflix/app/widgets/drawer.dart';
 import 'package:steamflix/utils/consts.dart';
 import 'package:steamflix/app/widgets/customcarouselslider.dart';
 import 'package:steamflix/app/widgets/customlistmovie.dart';
@@ -16,8 +17,22 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      
+    return Scaffold(appBar: AppBar(
+      toolbarHeight: 50,
+      backgroundColor: backgroundPrimary,
+      elevation: 0,
+      centerTitle: true,
+      title: Text(
+          "Streamflix".toUpperCase(),
+          style: const TextStyle(
+            color: Colors.amber,
+            fontSize: 19,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 3,
+          ),
+        ),
+    ),
+      drawer: const AppDrawer(),
       extendBody: true,
       body: Obx(
         () => mainController.isLoading.value

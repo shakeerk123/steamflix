@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       ),
       getPages: [
         GetPage(name: '/login', page: () => const LoginScreen()),
-        GetPage(name: '/main', page: () => const MainPage()),
+        GetPage(name: '/main', page: () =>  MainPage()),
         GetPage(name: '/search', page: () => const SearchScreen()),
         GetPage(name: '/news', page: () => NewsHomeScreen()),
         GetPage(name: '/profile', page: () =>  const ProfileScreen()),

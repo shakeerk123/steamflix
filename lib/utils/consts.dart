@@ -33,3 +33,9 @@ const TextStyle noRecom = TextStyle(
   color: Colors.white,
   fontSize: 16.0,
 );
+
+TextStyle titleHead = const TextStyle(
+  color: Colors.white,
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+);

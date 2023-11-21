@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:steamflix/app/controller/main_controller.dart';
+import 'package:steamflix/app/controller/fav_controller.dart';
 import 'package:steamflix/app/models/popular_movies_model.dart';
 import 'package:steamflix/app/services/api.dart';
 import 'package:steamflix/app/widgets/movie_detail_widgets/gradient.dart';
@@ -28,6 +29,7 @@ class MovieScreen extends StatefulWidget {
 
 class _MovieScreenState extends State<MovieScreen> {
   final MainController mainController = Get.put(MainController());
+  WishlistController wishlistController = Get.put(WishlistController());
   bool isLoading = true;
   late List<Results> recommendedMovies;
 
@@ -72,14 +74,14 @@ class _MovieScreenState extends State<MovieScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          if (mainController.isInWishlist(widget.movieId)) {
+          if (wishlistController.isInWishlist(widget.movieId)) {
             mainController.removeFromWishlist(widget.movieId);
           } else {
-            mainController.addToWishlist(widget.movieId);
+            wishlistController.addToWishlist(widget.movieId);
           }
         },
         child: Obx(() => Icon(
-              mainController.isInWishlist(widget.movieId)
+              wishlistController.isInWishlist(widget.movieId)
                   ? Icons.favorite
                   : Icons.favorite_border,
             )),
