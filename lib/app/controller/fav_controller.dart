@@ -31,9 +31,7 @@ class WishlistController extends GetxController {
       wishlist.add(movieId);
       _saveWishlist();
       update(); // Notify listeners about the change
-      print('Movie $movieId added to wishlist');
     } else {
-      print('Movie $movieId is already in the wishlist');
     }
   }
 
@@ -42,6 +40,5 @@ class WishlistController extends GetxController {
     wishlist.remove(movieId);
     _saveWishlist();
     update(); // Notify listeners about the change
-    print('Movie $movieId removed from wishlist');
   }
 }

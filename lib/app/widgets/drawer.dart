@@ -1,24 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:steamflix/app/controller/main_controller.dart';
 import 'package:steamflix/app/services/google_services.dart';
-import 'package:steamflix/app/views/download/download.dart';
+import 'package:steamflix/app/views/home/home_screen.dart';
 import 'package:steamflix/app/views/login/loginscreen.dart';
 import 'package:steamflix/utils/consts.dart';
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({super.key});
+  final MainController controller = Get.put(MainController());
+   AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.grey.shade400,
+      backgroundColor: const Color.fromARGB(100, 22, 44, 33),
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: BoxDecoration(
-              color: backgroundPrimary,
+            decoration: const BoxDecoration(
+              color: Colors.black,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,52 +51,48 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text(
-              'Home',
+            leading: Icon(
+              Icons.home,
+              color: white,
             ),
+            title: const Text('Home', style: TextStyle(color: Colors.white)),
             onTap: () {
-              // Handle home navigation
-              Navigator.pop(context);
+             
+              
             },
           ),
           ListTile(
-            leading: const Icon(Icons.search),
-            title: const Text('Search'),
+            leading: Icon(
+              Icons.search,
+              color: white,
+            ),
+            title: const Text('Search', style: TextStyle(color: Colors.white)),
             onTap: () {
               // Handle search navigation
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: const Icon(Icons.download),
-            title: const Text('Telegram Download'),
-            onTap: () {
-              // Handle downloads navigation
-              Get.to(DownloadScreen());
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.list),
-            title: const Text('My List'),
+            leading: Icon(
+              Icons.list,
+              color: white,
+            ),
+            title: const Text('My List', style: TextStyle(color: Colors.white)),
             onTap: () {
               // Handle My List navigation
               Navigator.pop(context);
             },
           ),
-          const Divider(),
           ListTile(
-            leading: const Icon(Icons.logout),
-            title: const Text('Logout'),
+            leading: Icon(
+              Icons.logout,
+              color: white,
+            ),
+            title: const Text('Logout', style: TextStyle(color: Colors.white)),
             onTap: () async {
               await FirebaseServices().signOut();
               Get.off(const LoginScreen());
             },
-          ),
-          ListTile(
-            leading: const Icon(Icons.help),
-            title: const Text('Help Center'),
-            onTap: () {},
           ),
         ],
       ),

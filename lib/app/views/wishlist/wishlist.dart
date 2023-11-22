@@ -12,13 +12,27 @@ class WishlistPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(appBar: AppBar(
+      toolbarHeight: 50,
+      backgroundColor: backgroundPrimary,
+      elevation: 0,
+      centerTitle: true,
+      title: Text(
+          "Favorite Lists".toUpperCase(),
+          style: const TextStyle(
+            color: Colors.amber,
+            fontSize: 19,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 3,
+          ),
+        ),
+    ),
       backgroundColor: background_primary,
       body: Obx(
         () {
           if (wishlistController.wishlist.isEmpty) {
             
-            return Center(
+            return const Center(
               child: Text(
                 'Wishlist is empty',
                 style: TextStyle(fontSize: 20, color: Colors.white),
@@ -44,15 +58,17 @@ class WishlistPage extends StatelessWidget {
                         background: Container(
                           color: Colors.red,
                           alignment: Alignment.centerRight,
-                          padding: EdgeInsets.only(right: 16),
-                          child: Icon(Icons.delete, color: Colors.white),
+                          padding: const EdgeInsets.only(right: 16),
+                          child: const Icon(Icons.delete, color: Colors.white),
                         ),
                         child: GestureDetector(
                           onTap: () {
                             _handleItemTap(movieId);
                           },
-                          child: ListTile(
-                            title: Text('${index + 1} : $status', style: noRecom),
+                          child: Card(color: const Color.fromARGB(100, 22,44, 33),
+                            child: ListTile(
+                              title: Text(status, style: noRecom),
+                            ),
                           ),
                         ),
                       );

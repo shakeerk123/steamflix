@@ -7,10 +7,11 @@ import 'package:steamflix/app/views/home/home_screen.dart';
 import 'package:steamflix/app/views/news/new_screen.dart';
 import 'package:steamflix/app/views/search/searchscreen.dart';
 import 'package:steamflix/app/views/wishlist/wishlist.dart';
+import 'package:steamflix/utils/consts.dart';
 import 'package:unicons/unicons.dart';
 
 class MainPage extends StatelessWidget {
-   MainPage({super.key});
+  MainPage({super.key});
 
   final MainController controller = Get.put(MainController());
 
@@ -27,10 +28,11 @@ class MainPage extends StatelessWidget {
         body: Obx(() => pages[controller.currentIndex.value]),
         bottomNavigationBar: Obx(
           () => BottomNavigationBar(
-            backgroundColor: Colors.black,
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: backgroundPrimary,
               onTap: controller.onTap,
               currentIndex: controller.currentIndex.value,
-              selectedItemColor: Colors.black,
+              selectedItemColor: Colors.white,
               unselectedItemColor: Colors.grey,
               showSelectedLabels: false,
               showUnselectedLabels: false,

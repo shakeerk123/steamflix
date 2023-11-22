@@ -6,11 +6,10 @@ import 'package:steamflix/app/views/bottombar/bottam_bar.dart';
 import 'package:steamflix/app/views/news/new_screen.dart';
 import 'package:steamflix/app/views/login/loginscreen.dart';
 import 'package:steamflix/app/views/movie_detail/moviescreen.dart';
-import 'package:steamflix/app/views/profile/profilescreen.dart';
 import 'package:steamflix/app/views/search/searchscreen.dart';
 import 'package:steamflix/app/views/splash/splash_screen.dart';
 import 'package:steamflix/app/views/tvshow_detail/tvshowscreen.dart';
-import 'package:steamflix/app/views/download/download.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +37,7 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.data == null) {
-            return const LoginScreen();
+            return const SplashScreen();
           } else {
             return const SplashScreen();
           }
@@ -46,14 +45,9 @@ class MyApp extends StatelessWidget {
       ),
       getPages: [
         GetPage(name: '/login', page: () => const LoginScreen()),
-        GetPage(name: '/main', page: () =>  MainPage()),
+        GetPage(name: '/main', page: () => MainPage()),
         GetPage(name: '/search', page: () => const SearchScreen()),
         GetPage(name: '/news', page: () => NewsHomeScreen()),
-        GetPage(name: '/profile', page: () =>  const ProfileScreen()),
-        GetPage(
-          name: '/download',
-          page: () => const DownloadScreen(),
-        ),
         GetPage(
           name: '/movie/:id',
           page: () => MovieScreen(movieId: Get.parameters['id']!),
